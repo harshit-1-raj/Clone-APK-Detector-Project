@@ -1,0 +1,98 @@
+.score-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    background: conic-gradient(var(--score-color) var(--score-percent), #f3f4f6 var(--score-percent));
+}
+
+.score-circle::before {
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.score-value {
+    position: relative;
+    z-index: 1;
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.assessment-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+}
+
+.assessment-safe {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.assessment-suspicious {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.assessment-dangerous {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.info-card {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    background-color: white;
+    padding: 1.5rem;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.permission-pill {
+    display: inline-block;
+    background-color: #e0e7ff;
+    color: #4338ca;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    margin: 0.25rem;
+}
+
+.dangerous-pill {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+.recommendation-item {
+    border-left: 4px solid #3b82f6;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
