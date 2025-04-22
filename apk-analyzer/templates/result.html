@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>APK Scanner - Results</title>
+  <meta name="description" content="Results of your APK security scan">
+  <meta name="keywords" content="apk, scanner, security, clone detection, results">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/img2/favicon.png') }}" rel="icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+  
+  <!-- Custom styles for result page -->
+  <link href="{{ url_for('static', filename='css/result.css') }}" rel="stylesheet">
+
+</head>
+
+<body class="starter-page-page">
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center me-auto">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+        <h1 class="sitename">CloneGuardians</h1>
+      </a>
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="/#hero">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#features">Features</a></li>
+          <li><a href="/#services">Blog Section</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="container d-lg-flex justify-content-between align-items-center">
+        <h1 class="mb-2 mb-lg-0">Scan Results</h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/upload">APK Upload</a></li>
+            <li class="current">Results</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Results Section -->
+    <section id="results-section" class="results-section section" style="background: linear-gradient(270deg, #B8D4FD 0%, rgba(218, 232, 253, 0) 50%), linear-gradient(90deg, #FCD8B0 -0.57%, rgba(250, 228, 203, 0) 50%), #f4f6fa;">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <!-- Basic Info Card -->
+            <div class="card shadow-sm p-4 mb-5 bg-white rounded" id="appBasicInfo">
+              <div class="d-flex align-items-center mb-4">
+                <div class="app-icon bg-light rounded p-3 me-3">
+                  <i class="bi bi-file-earmark-zip fs-1 text-primary"></i>
+                </div>
+                <div>
+                  <h2 class="fs-3 mb-1" id="appName">Loading...</h2>
+                  <p class="text-muted mb-0" id="packageName">Package: loading...</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <small class="text-muted d-block">File Name</small>
+                  <span class="fw-medium" id="fileName">Loading...</span>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <small class="text-muted d-block">Version</small>
+                  <span class="fw-medium" id="appVersion">Loading...</span>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <small class="text-muted d-block">Scan Date</small>
+                  <span class="fw-medium" id="scanDate">Loading...</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mb-5">
+              <!-- Safety Score -->
+              <div class="col-md-6 mb-4">
+                <div class="info-card d-flex flex-column align-items-center justify-content-center text-center">
+                  <h3 class="fs-4 mb-4">Safety Score</h3>
+                  <div class="score-circle mb-3" id="scoreCircle">
+                    <span class="score-value" id="safetyScore">0</span>
+                  </div>
+                  <div id="assessmentBadgeContainer" class="mt-2">
+                    <span class="assessment-badge" id="assessmentBadge">Analyzing</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Recommendations -->
+              <div class="col-md-6 mb-4">
+                <div class="info-card">
+                  <div class="d-flex align-items-center mb-3">
+                    <div class="feature-icon bg-blue-100 text-blue-600">
+                      <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3 class="fs-4 mb-0 ms-3">Recommendations</h3>
+                  </div>
+                  <div id="recommendationsList">
+                    <div class="text-center py-4">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Detailed Analysis -->
+            <div class="card shadow-sm p-4 mb-5 bg-white rounded">
+              <h3 class="fs-4 mb-4 pb-2 border-bottom">Detailed Analysis</h3>
+              
+              <ul class="nav nav-tabs mb-4" id="analysisTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="permissions-tab" data-bs-toggle="tab" 
+                          data-bs-target="#permissions-tab-pane" type="button" role="tab" 
+                          aria-controls="permissions-tab-pane" aria-selected="true">
+                    Permissions
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="clone-tab" data-bs-toggle="tab" 
+                          data-bs-target="#clone-tab-pane" type="button" role="tab" 
+                          aria-controls="clone-tab-pane" aria-selected="false">
+                    Clone Detection
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="security-tab" data-bs-toggle="tab" 
+                          data-bs-target="#security-tab-pane" type="button" role="tab" 
+                          aria-controls="security-tab-pane" aria-selected="false">
+                    Security Analysis
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="technical-tab" data-bs-toggle="tab" 
+                          data-bs-target="#technical-tab-pane" type="button" role="tab" 
+                          aria-controls="technical-tab-pane" aria-selected="false">
+                    Technical Details
+                  </button>
+                </li>
+              </ul>
+              
+              <div class="tab-content" id="analysisTabContent">
+                <!-- Permissions Tab -->
+                <div class="tab-pane fade show active" id="permissions-tab-pane" role="tabpanel" aria-labelledby="permissions-tab" tabindex="0">
+                  <div class="row mb-4">
+                    <div class="col-md-4">
+                      <div class="card bg-light border-0 h-100">
+                        <div class="card-body">
+                          <h5 class="card-title fw-bold mb-3">Permission Overview</h5>
+                          <div class="d-flex justify-content-between mb-2">
+                            <span>Total Permissions:</span>
+                            <span class="fw-medium" id="totalPermissions">0</span>
+                          </div>
+                          <div class="d-flex justify-content-between mb-2">
+                            <span>Dangerous Permissions:</span>
+                            <span class="fw-medium" id="dangerousPermissions">0</span>
+                          </div>
+                          <div class="d-flex justify-content-between">
+                            <span>Risk Score:</span>
+                            <span class="fw-medium" id="permissionRiskScore">0</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <h5 class="fw-bold mb-3">Permission List</h5>
+                      <div id="permissionList" class="p-2 bg-light rounded" style="max-height: 300px; overflow-y: auto;">
+                        <div class="text-center py-4">
+                          <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Clone Detection Tab -->
+                <div class="tab-pane fade" id="clone-tab-pane" role="tabpanel" aria-labelledby="clone-tab" tabindex="0">
+                  <div class="p-4 bg-light rounded mb-4" id="cloneAnalysisContainer">
+                    <div class="text-center py-4">
+                      <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Security Analysis Tab -->
+                <div class="tab-pane fade" id="security-tab-pane" role="tabpanel" aria-labelledby="security-tab" tabindex="0">
+                  <div class="row">
+                    <div class="col-md-4 mb-4">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <h5 class="card-title fw-bold">Malware Analysis</h5>
+                          <div class="mt-3" id="malwareAnalysisContainer">
+                            <div class="text-center py-4">
+                              <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <h5 class="card-title fw-bold">Code Obfuscation</h5>
+                          <div class="mt-3" id="obfuscationContainer">
+                            <div class="text-center py-4">
+                              <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <h5 class="card-title fw-bold">Network Security</h5>
+                          <div class="mt-3" id="networkSecurityContainer">
+                            <div class="text-center py-4">
+                              <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Technical Details Tab -->
+                <div class="tab-pane fade" id="technical-tab-pane" role="tabpanel" aria-labelledby="technical-tab" tabindex="0">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <tbody id="technicalDetails">
+                        <tr>
+                          <td class="fw-medium">File Hash (SHA-256)</td>
+                          <td id="fileHash" class="font-monospace small text-break">Loading...</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-medium">VirusTotal Results</td>
+                          <td id="virusTotalResults">Loading...</td>
+                        </tr>
+                        <tr>
+                          <td class="fw-medium">SDK Version</td>
+                          <td id="sdkInfo">Loading...</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  
+                  <div class="mt-4">
+                    <h5 class="fw-bold mb-3">App Activities</h5>
+                    <div id="activitiesList" class="p-3 bg-light rounded" style="max-height: 200px; overflow-y: auto;">
+                      <div class="text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between">
+              <a href="/upload" class="btn btn-outline-primary">
+                <i class="bi bi-arrow-left me-2"></i> Scan Another APK
+              </a>
+              <button id="downloadReportBtn" class="btn btn-primary">
+                <i class="bi bi-file-earmark-text me-2"></i> Download Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="/" class="logo d-flex align-items-center">
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="">
+            <span class="sitename">CloneGuardians</span>
+          </a>
+          <div class="footer-slogan pt-3">
+            <p>Because Even Apps Deserve a DNA Test!</p>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Helpful Links</h4>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Terms <span>&</span> Conditions</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-3 footer-links">
+          <h4>Connect With Us</h4>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-12 footer-newsletter">
+          <h4>Get In Touch</h4>
+          <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+          <p><strong>Email:</strong> <span>info@example.com</span></p>
+        </div>
+      </div>
+    </div>
+    <div class="container copyright text-center mt-4">
+      <p><span>Copyright</span> © <span>2025</span></p>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+  <!-- Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  
+  <!-- Result_page JS File -->
+  <script src="{{ url_for('static', filename='js/result.js') }}"></script>
+  
+</body>
+  
+</html>
